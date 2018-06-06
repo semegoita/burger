@@ -18,10 +18,4 @@ var burgers = {
       });
     }
   };
-  
-
-
-
-
-
 module.exports = burger;
