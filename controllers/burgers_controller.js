@@ -12,33 +12,35 @@ router.get("/", function(req, res) {
     });
   });
   
-  router.post("/api/burgers", function(req, res) {
-    //burger.create(["burger_name"], [req.body.name, req.body.sleepy], function(result) {
-      // Send back the ID of the new quote
-      //res.json({ id: result.insertId });
-   // });
+  router.post("/burgers", function(req, res) {
+    burger.insertOne([
+      "burger_name", "devoured"
+  ], [
+      req.body.burger_name, "0"
+  ], function() {
+      res.redirect("/");
   });
-  
-  router.put("/api/burgers/:id", function(req, res) {
+   
+  });
+  router.post("/update/:id", function(req, res) {
     var condition = "id = " + req.params.id;
-  
+
+     console.log("condition", condition);
+    burger.updateOne({
+        devoured: true
+    }, condition, function() {
+        console.log(req.body);
+        res.redirect("/");
+    });
+});  
+router.post('/delete/:id', function(req, res) {
+    var condition = "id = " + req.params.id;
     console.log("condition", condition);
-  
-    cat.update(
-      {
-        sleepy: req.body.sleepy
-      },
-      condition,
-      function(result) {
-        if (result.changedRows === 0) {
-          // If no rows were changed, then the ID must not exist, so 404
-          return res.status(404).end();
-        }
-        res.status(200).end();
-  
-      }
-    );
-  });
+        
+    burger.deleteOne(condition, function() {
+        res.redirect('/');
+    });
+});
   
   // Export routes for server.js to use.
   module.exports = router;
