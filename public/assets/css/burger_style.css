@@ -1,0 +1,19 @@
+body {
+    background-image: url("../img/background.png");
+    background-color: #101e1f;
+    font-family: 'BioRhyme Expanded', serif;
+    color: aliceblue;
+}
+
+.container {
+    text-align: center;
+}
+
+.order-size {
+    height: 160px;
+}
+
+.burger-size {
+    margin: 50px;
+    height: 100px;
+}
